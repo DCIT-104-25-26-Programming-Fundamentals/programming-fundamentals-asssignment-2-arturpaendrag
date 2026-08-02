@@ -78,5 +78,125 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
 using namespace std;
 
+// =============================================================================
+// FUNCTION: displayMenu
+// PURPOSE: Displays the menu options
+// RETURNS: void
+// =============================================================================
+void displayMenu() {
+    cout << "\n============================" << endl;
+    cout << "     TO-DO LIST MENU" << endl;
+    cout << "============================" << endl;
+    cout << "1. Add task" << endl;
+    cout << "2. View tasks" << endl;
+    cout << "3. Delete task" << endl;
+    cout << "4. Quit" << endl;
+    cout << "Enter your choice (1-4): ";
+}
+
+// =============================================================================
+// FUNCTION: addTask
+// PURPOSE: Adds a new task to the to-do list
+// PARAMETERS: vector<string> &tasks — reference to task list
+// RETURNS: void
+// =============================================================================
+void addTask(vector<string> &tasks) {
+    string task;
+    cout << "Enter task: ";
+    cin.ignore();  // Clear newline from input buffer
+    getline(cin, task);  // Read entire line including spaces
+    
+    if (task.empty()) {
+        cout << "Error: Task cannot be empty." << endl;
+        return;
+    }
+    
+    tasks.push_back(task);
+    cout << "Task added: \"" << task << "\"" << endl;
+}
+
+// =============================================================================
+// FUNCTION: viewTasks
+// PURPOSE: Displays all tasks in the list
+// PARAMETERS: vector<string> &tasks — reference to task list
+// RETURNS: void
+// =============================================================================
+void viewTasks(vector<string> &tasks) {
+    if (tasks.empty()) {
+        cout << "\nYour to-do list is empty. Add a task to get started!" << endl;
+        return;
+    }
+    
+    cout << "\nYour Tasks:" << endl;
+    for (int i = 0; i < tasks.size(); i++) {
+        cout << (i + 1) << ". " << tasks[i] << endl;
+    }
+}
+
+// =============================================================================
+// FUNCTION: deleteTask
+// PURPOSE: Deletes a task from the list by task number
+// PARAMETERS: vector<string> &tasks — reference to task list
+// RETURNS: void
+// =============================================================================
+void deleteTask(vector<string> &tasks) {
+    if (tasks.empty()) {
+        cout << "\nYour to-do list is empty. Nothing to delete." << endl;
+        return;
+    }
+    
+    viewTasks(tasks);
+    
+    int taskNum;
+    cout << "\nEnter task number to delete: ";
+    cin >> taskNum;
+    
+    // Validate task number (convert to 0-based index)
+    if (taskNum < 1 || taskNum > tasks.size()) {
+        cout << "Error: Invalid task number." << endl;
+        return;
+    }
+    
+    string deletedTask = tasks[taskNum - 1];
+    tasks.erase(tasks.begin() + (taskNum - 1));  // Remove task at index
+    cout << "Task \"" << deletedTask << "\" has been removed." << endl;
+}
+
+// =============================================================================
+// MAIN FUNCTION
+// =============================================================================
+int main() {
+    vector<string> tasks;  // Store all tasks
+    int choice;
+    
+    cout << "============================\n";
+    cout << "Welcome to the To-Do List!\n";
+    cout << "============================" << endl;
+    
+    while (true) {
+        displayMenu();
+        cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                addTask(tasks);
+                break;
+            case 2:
+                viewTasks(tasks);
+                break;
+            case 3:
+                deleteTask(tasks);
+                break;
+            case 4:
+                cout << "\nGoodbye!" << endl;
+                return 0;  // Exit program
+            default:
+                cout << "Error: Invalid choice. Please enter 1, 2, 3, or 4." << endl;
+        }
+    }
+    
+    return 0;
+}
