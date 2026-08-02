@@ -42,3 +42,99 @@
 #include <iostream>
 using namespace std;
 
+// =============================================================================
+// FUNCTION: calculateSum
+// PURPOSE: Calculates the sum of all numbers in the array
+// PARAMETERS: int arr[] — array of numbers, int n — array size
+// RETURNS: int — the sum of all numbers
+// =============================================================================
+int calculateSum(int arr[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+// =============================================================================
+// FUNCTION: calculateAverage
+// PURPOSE: Calculates the average of all numbers in the array
+// PARAMETERS: int sum — sum of all numbers, int n — count of numbers
+// RETURNS: double — the average value
+// =============================================================================
+double calculateAverage(int sum, int n) {
+    return (double)sum / n;
+}
+
+// =============================================================================
+// FUNCTION: findMaximum
+// PURPOSE: Finds the maximum value in the array
+// PARAMETERS: int arr[] — array of numbers, int n — array size
+// RETURNS: int — the maximum value
+// =============================================================================
+int findMaximum(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+// =============================================================================
+// FUNCTION: findMinimum
+// PURPOSE: Finds the minimum value in the array
+// PARAMETERS: int arr[] — array of numbers, int n — array size
+// RETURNS: int — the minimum value
+// =============================================================================
+int findMinimum(int arr[], int n) {
+    int min = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+// =============================================================================
+// MAIN FUNCTION
+// =============================================================================
+int main() {
+    int n;
+    
+    // Prompt user for the number of elements
+    cout << "How many numbers? ";
+    cin >> n;
+    
+    // Validate that n is positive
+    if (n <= 0) {
+        cout << "Error: Number of elements must be positive." << endl;
+        return 1;
+    }
+    
+    // Create array to store numbers
+    int arr[n];
+    
+    // Read numbers from user
+    for (int i = 0; i < n; i++) {
+        cout << "Enter number " << (i + 1) << ": ";
+        cin >> arr[i];
+    }
+    
+    // Calculate statistics using functions
+    int sum = calculateSum(arr, n);
+    double average = calculateAverage(sum, n);
+    int maximum = findMaximum(arr, n);
+    int minimum = findMinimum(arr, n);
+    
+    // Display results
+    cout << "\nResults:" << endl;
+    cout << "Sum:     " << sum << endl;
+    cout << "Average: " << average << endl;
+    cout << "Maximum: " << maximum << endl;
+    cout << "Minimum: " << minimum << endl;
+    
+    return 0;
+}
