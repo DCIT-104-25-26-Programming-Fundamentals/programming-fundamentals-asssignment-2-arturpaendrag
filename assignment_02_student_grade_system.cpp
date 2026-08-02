@@ -46,3 +46,53 @@
 #include <iostream>
 using namespace std;
 
+// =============================================================================
+// FUNCTION: getGrade
+// PURPOSE: Determines the letter grade based on a student score
+// PARAMETERS: int score — the student's score (0-100)
+// RETURNS: char — the letter grade ('A', 'B', 'C', 'D', 'F'), or '\0' if invalid
+// =============================================================================
+char getGrade(int score) {
+    // Validate score is in range 0-100
+    if (score < 0 || score > 100) {
+        return '\0';  // Return null character to indicate error
+    }
+    
+    // Determine grade based on score range
+    if (score >= 80) {
+        return 'A';
+    } else if (score >= 70) {
+        return 'B';
+    } else if (score >= 60) {
+        return 'C';
+    } else if (score >= 50) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+// =============================================================================
+// MAIN FUNCTION
+// =============================================================================
+int main() {
+    int score;
+    
+    // Prompt user for input
+    cout << "Enter student score (0-100): ";
+    cin >> score;
+    
+    // Call getGrade() to get the letter grade
+    char grade = getGrade(score);
+    
+    // Check if score was valid
+    if (grade == '\0') {
+        // Invalid score
+        cout << "Error: Score must be between 0 and 100." << endl;
+    } else {
+        // Valid score, print the grade
+        cout << "Grade: " << grade << endl;
+    }
+    
+    return 0;
+}
