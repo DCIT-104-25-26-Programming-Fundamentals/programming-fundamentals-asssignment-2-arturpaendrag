@@ -55,5 +55,88 @@
 // =============================================================================
 
 #include <iostream>
+#include <iomanip>
+
 using namespace std;
 
+// =============================================================================
+// PART A — PRINT MULTIPLICATION TABLE FOR A SINGLE NUMBER
+// =============================================================================
+void printSingleTable(int num) {
+    // Validate input
+    if (num <= 0) {
+        cout << "Error: Number must be positive." << endl;
+        return;
+    }
+    
+    cout << "Multiplication Table for " << num << ":" << endl;
+    
+    for (int i = 1; i <= 12; i++) {
+        cout << setw(2) << num << "  x  " << setw(2) << i << "  =  " 
+             << setw(3) << (num * i) << endl;
+    }
+}
+
+// =============================================================================
+// PART B — PRINT MULTIPLICATION TABLES FROM 1 TO N
+// =============================================================================
+void printMultipleTables(int n) {
+    // Validate input
+    if (n <= 0) {
+        cout << "Error: Number must be positive." << endl;
+        return;
+    }
+    
+    for (int num = 1; num <= n; num++) {
+        cout << "Multiplication Table for " << num << ":" << endl;
+        
+        for (int i = 1; i <= 12; i++) {
+            cout << setw(2) << num << "  x  " << setw(2) << i << "  =  " 
+                 << setw(3) << (num * i) << endl;
+        }
+        
+        // Print separator line between tables (except after the last one)
+        if (num < n) {
+            cout << "---------------------------" << endl;
+        }
+    }
+}
+
+// =============================================================================
+// MAIN FUNCTION
+// =============================================================================
+int main() {
+    int choice;
+    
+    cout << "========== Multiplication Table Generator ==========" << endl;
+    cout << "1. Print single multiplication table" << endl;
+    cout << "2. Print tables from 1 to N" << endl;
+    cout << "Choose operation (1-2): ";
+    cin >> choice;
+    cout << endl;
+    
+    if (choice == 1) {
+        // PART A: Single Table
+        int num;
+        cout << "Enter a number: ";
+        cin >> num;
+        cout << endl;
+        
+        printSingleTable(num);
+        
+    } else if (choice == 2) {
+        // PART B: Multiple Tables
+        int n;
+        cout << "Enter N (print tables 1 to N): ";
+        cin >> n;
+        cout << endl;
+        
+        printMultipleTables(n);
+        
+    } else {
+        cout << "Invalid choice!" << endl;
+        return 1;
+    }
+    
+    return 0;
+}
